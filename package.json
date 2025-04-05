@@ -1,0 +1,43 @@
+{
+  "name": "@khulnasoft/nuxt-edit-this-page",
+  "version": "1.0.0",
+  "description": "Add an 'Edit this page' link to your Nuxt pages",
+  "repository": "https://github.com/khulnasoft-lab/nuxt-edit-this-page",
+  "homepage": "https://github.com/khulnasoft-lab/nuxt-edit-this-page/blob/master/README.md",
+  "license": "MIT",
+  "main": "lib/module.js",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "eslint": "eslint lib/ test/",
+    "eslint:fix": "pnpm eslint --fix",
+    "prettier": "prettier --list-different 'lib/**/*.js'",
+    "prettier:fix": "pnpm prettier --write",
+    "test": "jest",
+    "dev": "nuxt -c ./test/fixture/nuxt.config.js",
+    "validate-lockfile": "pnpm install --frozen-lockfile"
+  },
+  "devDependencies": {
+    "@babel/core": "7.12.10",
+    "@babel/preset-env": "7.12.11",
+    "babel-jest": "26.6.3",
+    "eslint": "7.18.0",
+    "eslint-plugin-jest": "24.1.3",
+    "eslint-plugin-vue": "^7.5.0",
+    "jest": "26.6.3",
+    "jsdom": "16.4.0",
+    "nuxt-edge": "^2.15.0-26866120.0fd5f7df",
+    "prettier": "2.2.1",
+    "request-promise-native": "^1.0.5",
+    "standard-version": "9.1.0",
+    "yargs": "16.2.0"
+  },
+  "packageManager": "pnpm@9.14.2",
+  "eslintIgnore": [
+    "lib/templates/*.*"
+  ]
+}
