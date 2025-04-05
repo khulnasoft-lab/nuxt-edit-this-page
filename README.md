@@ -1,56 +1,59 @@
-# nuxt-edit-this-page
+# 📝 @khulnasoft/nuxt-edit-this-page
 
-[![pipeline status](https://github.com/khulnasoft-lab/nuxt-edit-this-page/actions/workflows/ci.yml/badge.svg)](https://github.com/khulnasoft-lab/nuxt-edit-this-page/actions/workflows/ci.yml)
-[![npm (scoped with tag)](https://img.shields.io/npm/v/@khulnasoft/nuxt-edit-this-page/latest.svg?style=flat-square)](https://npmjs.com/package/@khulnasoft/nuxt-edit-this-page)
-[![npm](https://img.shields.io/npm/dt/@khulnasoft/nuxt-edit-this-page.svg?style=flat-square)](https://npmjs.com/package/@khulnasoft/nuxt-edit-this-page)
+[![CI](https://github.com/khulnasoft-lab/nuxt-edit-this-page/actions/workflows/ci.yml/badge.svg)](https://github.com/khulnasoft-lab/nuxt-edit-this-page/actions/workflows/ci.yml)
+[![npm version](https://img.shields.io/npm/v/@khulnasoft/nuxt-edit-this-page/latest.svg?style=flat-square)](https://npmjs.com/package/@khulnasoft/nuxt-edit-this-page)
+[![npm downloads](https://img.shields.io/npm/dt/@khulnasoft/nuxt-edit-this-page.svg?style=flat-square)](https://npmjs.com/package/@khulnasoft/nuxt-edit-this-page)
 
-> Add an "Edit this page" link to your Nuxt pages
+> Effortlessly add an **"Edit this page"** link to your Nuxt app — seamlessly integrated with Git platforms.
 
-[📖 **Release Notes**](./CHANGELOG.md)
+📄 [**Changelog**](./CHANGELOG.md)
 
-## Features
+---
 
-This module let's you add "Edit this page" links to your Nuxt project's pages. The link opens the web IDE for the active file, which is the page's Vue file by default but that can be changed as needed by using a custom path resolver.
+## 🚀 Features
 
-## Supported Git services
+- 💻 Adds a global component for “Edit this page” links
+- 🔗 Git-aware: supports GitHub and self-hosted Git platforms
+- 🔧 Configurable path, branch, link text, and more
+- 📦 Lightweight and Nuxt-native
 
-- [GitHub](https://github.com/)
-- [KhulnaSoft](https://khulnasoft.com/)
+---
 
-## Setup
+## 📦 Installation
 
-- Install the module with your favorite package manager.
-
-```sh
+```bash
+# With pnpm
 pnpm add @khulnasoft/nuxt-edit-this-page
-# Or npm i @khulnasoft/nuxt-edit-this-page
+
+# Or with npm
+npm install @khulnasoft/nuxt-edit-this-page
 ```
 
-- Add `@khulnasoft/nuxt-edit-this-page` to the `modules` section in `nuxt.config.js`.
+---
+
+## ⚙️ Configuration
+
+Add the module to your `nuxt.config.js`:
 
 ```js
-// nuxt.config.js
-{
-  modules: [
-    '@khulnasoft/nuxt-edit-this-page',
- ],
-}
-```
+export default {
+  modules: ['@khulnasoft/nuxt-edit-this-page'],
 
-- Configure the module as needed by adding an `editThisPage` key to `nuxt.config.js`.
-
-```js
-// nuxt.config.js
-{
   editThisPage: {
-    // Module options
-  }
-}
+    repo: 'https://github.com/khulnasoft-lab/nuxt-edit-this-page',
+    branch: 'master',
+    path: 'blob',
+    linkText: 'Edit this page',
+    componentName: 'EditThisPageLink',
+  },
+};
 ```
 
-## Usage
+---
 
-When enabled, the module registers a global component that you can use to display an "Edit this page" link in any of your page. The component will automatically generate a link based on the route that's being visited so that you can quickly access the live editor on the Git hosting service.
+## 🧪 Usage
+
+Use the component anywhere in your pages:
 
 ```vue
 <template>
@@ -58,122 +61,87 @@ When enabled, the module registers a global component that you can use to displa
 </template>
 ```
 
-## Options
+---
 
-### repo
+## ⚙️ Options
 
-- **Type**: `String`: required
+| Option         | Type     | Default      | Description |
+|----------------|----------|--------------|-------------|
+| `repo`         | String   | _required_   | Git repository URL (HTTPS or SSH) |
+| `branch`       | String   | `'master'`   | Git branch to edit |
+| `path`         | String   | `'blob'`     | URL path (e.g., `blob`, `edit`) |
+| `linkText`     | String   | `'Edit this page'` | Text shown in the link |
+| `componentName`| String   | `'EditThisPageLink'` | Custom component name |
 
-The remote Git repository where the files reside, can be an HTTPS URL or an SSH address.
+---
 
-Example:
+## 🧰 Props
 
-```js
-// nuxt.config.js
-{
-  editThisPage: {
-    repo: 'https://github.com/khulnasoft-lab/nuxt-edit-this-page.git',
+Override options locally via props:
 
-    // Or
-    // repo: 'git@github.com:khulnasoft-lab/nuxt-edit-this-page.git',
-
-    // Also works with the project's URL
-    // repo: 'https://github.com/khulnasoft-lab/nuxt-edit-this-page',
-  }
-}
+```vue
+<edit-this-page-link
+  edit-url="https://custom.git/edit/path"
+  link-text="Contribute here"
+/>
 ```
 
-### path
+| Prop        | Type   | Description |
+|-------------|--------|-------------|
+| `editUrl`   | String | Custom edit link URL |
+| `linkText`  | String | Custom link text |
 
-- **Type**: `String`
-- **Default**: `'blob'`
+---
 
-The `path` option is appended to the base edit URL. By default, the blob path is used, which produces URLs like `https://github.com/khulnasoft-lab/nuxt-edit-this-page/blob/master/README.md`. This option could be used to make the URL point to the edit path directly, ie setting `path` to `'edit'` would produce URLs like `https://github.com/khulnasoft-lab/nuxt-edit-this-page/edit/master/README.md`.
+## 🎨 Scoped Slot Example
 
-### branch
-
-- **Type**: `String`
-- **Default**: `'master'`
-
-Git branch to use when editing files.
-
-### linkText
-
-- **Type**: `String`
-- **Default**: `'Edit this page'`
-
-Text to show when rendering the link.
-
-### componentName
-
-- **Type**: `String`
-- **Default**: `'EditThisPageLink'`
-
-The component's name.
-
-## Props
-
-The component accepts a few props that let you override the module's options if needed.
-
-#### editUrl
-
-- Type: `String`
-
-Base URL to prepend to the file path when generating the edit link. This is computed automatically based on the `repo` and `branch` options, use it when you need to override the URL on a case-per-case basis.
-
-### linkText
-
-- Type: `String`
-
-Text to show when rendering the link. Defaults to the value set in the module's options.
-
-## Scoped slot
-
-The component exposes a scoped slot that you can use to customize the rendering if props are too limited. The slot receives a property `href` that contains the computed edit URL.
-
-Example
+Customize rendering via scoped slot:
 
 ```vue
 <template>
   <edit-this-page-link>
-    <template v-slot:default="{ href }">
-      <span>Customized link pointing to {{ href }}</span>
+    <template #default="{ href }">
+      <a :href="href" target="_blank" rel="noopener">✏️ Contribute to this doc</a>
     </template>
   </edit-this-page-link>
 </template>
 ```
 
-## Custom path resolver
+---
 
-Sometimes, your pages display contents from other files and you might want the "Edit this page" link to point to the included file, rather than the visited page's component. This can be achieved by adding an `editThisPage.resolve` option to your page. `editThisPage.resolve` is a function that receives the current route and should return the computed file path relative to the repository's root.
+## 🧠 Custom Path Resolver
 
-Example:
+Use a custom file path if the content isn’t based on the route:
 
 ```vue
-<template>
-  <!-- pages/_slug.vue -->
-</template>
-
 <script>
 export default {
   editThisPage: {
     resolve({ route }) {
-      const { slug } = route.params;
-      return `docs/${slug}.md`;
+      return `docs/${route.params.slug}.md`;
     },
   },
 };
 </script>
 ```
 
-## Development
+---
 
-- Clone this repository
-- Install dependencies using `pnpm install`
-- Start development server using `pnpm dev`
+## 🛠 Development
 
-## License
+```bash
+git clone https://github.com/khulnasoft-lab/nuxt-edit-this-page.git
+cd nuxt-edit-this-page
+pnpm install
+pnpm dev
+```
 
-[MIT License](./LICENSE)
+---
 
-Copyright (c) GitHub
+## 📄 License
+
+[MIT](./LICENSE) © [KhulnaSoft](https://github.com/khulnasoft)
+
+---
+
+Want to add more polish like demo links, badges for GitHub stars/contributors, or a table of contents? Let me know — I can help you make it pop even more!
