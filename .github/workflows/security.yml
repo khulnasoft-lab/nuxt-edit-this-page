@@ -13,24 +13,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      
+
       - name: Run Dependency Scanning
         uses: actions/dependency-review-action@v3
         with:
           fail-on-severity: high
-  
+
   secret-detection:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      
+
       - name: Run secret detection
         uses: gitleaks/gitleaks-action@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  
+
   sast:
     runs-on: ubuntu-latest
     steps:
@@ -40,7 +40,7 @@ jobs:
         uses: actions/codeql-action/init@v2
         with:
           languages: javascript
-      
+
       - name: Perform CodeQL Analysis
         uses: actions/codeql-action/analyze@v3
   
@@ -48,16 +48,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      
+
       - uses: pnpm/action-setup@v2
         with:
           version: 9.x
-      
+
       - name: Use Node.js 16
         uses: actions/setup-node@v3
         with:
           node-version: 16
           cache: 'pnpm'
-          
+
       - name: Validate lockfile
         run: pnpm validate-lockfile 
