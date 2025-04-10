@@ -1,24 +1,21 @@
-module.exports = {
+// .eslintrc.js
+
+export default {
   root: true,
-  parserOptions: {
-    sourceType: 'module',
-  },
   env: {
     browser: true,
     node: true,
-    jest: true,
   },
   extends: [
     'eslint:recommended',
-    'plugin:vue/recommended'
+    'plugin:vue/vue3-recommended',
+    'plugin:jest/recommended',
   ],
-  plugins: ['jest', 'vue'],
-  globals: {
-    'jest/globals': true,
-    jasmine: true,
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
   },
   rules: {
-    'filenames/match-regex': 'off',
-    // 'import/prefer-default-export': 'off',
+    // custom rules here
   },
 };
