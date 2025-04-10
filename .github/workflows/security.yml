@@ -42,7 +42,7 @@ jobs:
           languages: javascript
       
       - name: Perform CodeQL Analysis
-        uses: actions/codeql-action/analyze@v2
+        uses: actions/codeql-action/analyze@v3
   
   lockfile-check:
     runs-on: ubuntu-latest
