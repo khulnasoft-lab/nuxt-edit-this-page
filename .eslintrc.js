@@ -1,3 +1,5 @@
+// .eslintrc.js
+
 export default {
   root: true,
   env: {
@@ -7,10 +9,10 @@ export default {
   extends: [
     'eslint:recommended',
     'plugin:vue/vue3-recommended',
-    'plugin:@typescript-eslint/recommended',
+    'plugin:jest/recommended',
   ],
   parserOptions: {
-    ecmaVersion: 2020,
+    ecmaVersion: 2022,
     sourceType: 'module',
   },
   rules: {
