@@ -1,6 +1,6 @@
-// .eslintrc.cjs
+// .eslintrc.js
 
-module.exports = {
+export default {
   root: true,
   env: {
     browser: true,
@@ -16,6 +16,6 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
-    // your rules here
+    // custom rules here
   },
 };
